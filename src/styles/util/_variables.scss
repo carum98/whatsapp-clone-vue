@@ -1,0 +1,39 @@
+[data-theme="dark"] {
+	--bg-color: #0a0f14;
+	--font-color: #f4f4f4;
+
+	--bg-side: #111c21;
+	--bg-side-header: #202c33;
+	--bg-content: #222e35;
+
+	--bg-stripe: transparent;
+	--bg-conversation: #0b141a;
+	--bg-message-textarea: #2a3942;
+
+	--border-color: #8696a026;
+}
+
+[data-theme="light"] {
+	--bg-color: #dfdfdd;
+	--font-color: #121416;
+
+	--bg-side: #ffffff;
+	--bg-side-header: #f0f2f5;
+	--bg-content: #f8f8f8;
+
+	--bg-stripe: #09a784;
+	--bg-conversation: #efeae2;
+	--bg-message-textarea: #fefefe;
+
+	--border-color: #d1d7db;
+}
+
+$bg-color: var(--bg-color);
+$font-color: var(--font-color);
+$bg-side: var(--bg-side);
+$bg-side-header: var(--bg-side-header);
+$bg-content: var(--bg-content);
+$bg-stripe: var(--bg-stripe);
+$border-color: var(--border-color);
+$bg-message-textarea: var(--bg-message-textarea);
+$bg-conversation: var(--bg-conversation);

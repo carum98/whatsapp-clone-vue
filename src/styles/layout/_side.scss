@@ -1,0 +1,51 @@
+#side {
+	flex: 30%;
+	background-color: $bg-side;
+	overflow: hidden;
+
+	header {
+		display: flex;
+		height: 59px;
+		background: $bg-side-header;
+		align-items: center;
+		padding: 0 15px;
+
+		div:first-child {
+			flex-grow: 1;
+		}
+
+		button {
+			padding: 8px 12px;
+		}
+	}
+
+	.search {
+		padding: 10px;
+		border-bottom: $border-color 1px solid;
+
+
+		div {
+			padding: 5px 15px;
+			background-color: $bg-side-header;
+			border-radius: 10px;
+			display: flex;
+			gap: 35px;
+
+			input {
+				flex-grow: 1;
+			}
+		}
+
+		input {
+			border: none;
+			background-color: transparent;
+			color: $font-color;
+			font-size: 15px;
+		}
+	}
+
+	.chats {
+		overflow: scroll;
+		height: 100%;
+	}
+}

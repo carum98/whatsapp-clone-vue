@@ -1,0 +1,36 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	// scrollbar-gutter: stable;
+}
+
+button {
+	cursor: pointer;
+	background: transparent;
+	border: unset;
+	color: unset;
+}
+
+input,
+textarea {
+	border: none;
+	background: transparent;
+	color: unset;
+	resize: none;
+
+	&:focus,
+	&:focus-visible {
+		outline: none;
+	}
+
+	&::placeholder {
+		color: #8696a0;
+		font-family: 'Helvetica';
+	}
+}
+
+::-webkit-scrollbar {
+	width: 6px !important;
+	height: 6px !important;
+}
