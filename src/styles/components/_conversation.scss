@@ -1,6 +1,7 @@
 .conversation {
 	height: 100%;
 	background: $bg-conversation;
+	overflow: hidden;
 
 	&__header {
 		display: flex;
@@ -22,11 +23,24 @@
 	}
 
 	&__panel {
-		background-image: url('/ws-bg.png');
-		background-size: 412.5px 749.25px;
-		background-repeat: repeat;
-		opacity: 0.06;
 		height: calc(100% - 118px);
+		display: flex;
+		flex-direction: column-reverse;
+		// justify-content: flex-end;
+
+		overflow-y: scroll;
+
+		&::before {
+			content: "";
+			position: absolute;
+			width: 100%;
+			top: 59px;
+			bottom: 59px;
+			background-image: url('/ws-bg.png');
+			// background-size: 412.5px 749.25px;
+			background-repeat: repeat;
+			opacity: 0.06;
+		}
 	}
 
 	&__footer {

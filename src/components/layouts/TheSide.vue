@@ -36,7 +36,7 @@ import IconSearch from '../icons/IconSearch.vue';
 			</div>
 		</div>
 		<div class="chats">
-			<BaseChat v-for="i in 5" />
+			<BaseChat v-for="i in 35" />
 		</div>
 	</section>
 </template>

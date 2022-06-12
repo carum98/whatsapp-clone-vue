@@ -1,5 +1,6 @@
 <script setup>
 import BaseAvatar from '../BaseAvatar.vue';
+import BaseMessage from '../BaseMessage.vue';
 
 import IconSearch from '../icons/IconSearch.vue';
 import IconMoreVert from '../icons/IconMoreVert.vue';
@@ -28,9 +29,14 @@ import IconPtt from '../icons/IconPtt.vue';
 			</div>
 		</header>
 
-		<section class="conversation__panel">
-
-		</section>
+		<div class="conversation__panel">
+			<BaseMessage is-in />
+			<BaseMessage is-out />
+			<BaseMessage is-out />
+			<BaseMessage is-out />
+			<BaseMessage is-in />
+			<BaseMessage is-out />
+		</div>
 
 		<footer class="conversation__footer">
 			<button>

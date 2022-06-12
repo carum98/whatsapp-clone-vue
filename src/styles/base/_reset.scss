@@ -34,3 +34,12 @@ textarea {
 	width: 6px !important;
 	height: 6px !important;
 }
+
+::-webkit-scrollbar-thumb {
+	background: hsla(203, 12%, 58%, 0.2);
+	border-radius: 6px;
+}
+
+::-webkit-scrollbar-button {
+	display: none;
+}
