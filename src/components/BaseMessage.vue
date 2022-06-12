@@ -1,4 +1,5 @@
 <script setup>
+import Message from '../models/Messages';
 import IconCheck from './icons/IconCheck.vue';
 defineProps({
 	isIn: {
@@ -9,13 +10,17 @@ defineProps({
 		type: Boolean,
 		default: false,
 	},
+	message: {
+		type: Message,
+		required: true,
+	}
 })
 </script>
 
 <template>
 	<div class="message" :class="{ 'in': isIn, 'out': isOut }">
 		<div>
-			<p>Hola mundo</p>
+			<p>{{ message.content }}</p>
 			<span>
 				8:00 p. m.
 				<IconCheck v-if="isOut" />

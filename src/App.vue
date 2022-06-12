@@ -1,10 +1,14 @@
 <script setup>
-import TheSide from "./components/layouts/TheSide.vue";
-import TheContent from "./components/layouts/TheContent.vue";
+import PageLogin from './pages/PageLogin.vue';
+import PageMain from './pages/PageMain.vue';
 
+import { useAuth } from './composables/useAuth';
+
+const { isAuthenticated } = useAuth();
+
+const component = isAuthenticated ? PageMain : PageLogin;
 </script>
 
 <template>
-  <TheSide />
-  <TheContent />
+  <component :is="component"></component>
 </template>

@@ -1,4 +1,7 @@
 <script setup>
+import Chat from '../../models/Chats';
+import Message from '../../models/Messages';
+
 import BaseAvatar from '../BaseAvatar.vue';
 import BaseMessage from '../BaseMessage.vue';
 
@@ -8,6 +11,19 @@ import IconSmile from '../icons/IconSmile.vue';
 import IconClip from '../icons/IconClip.vue';
 import IconPtt from '../icons/IconPtt.vue';
 
+import { useFetch } from '../../composables/useFetch';
+
+const props = defineProps({
+	chat: {
+		type: Chat,
+		required: true,
+	},
+});
+
+const { data } = useFetch({
+	url: `chats/${props.chat.id}/messages`,
+	classInstance: Message
+});
 </script>
 
 <template>
@@ -16,7 +32,7 @@ import IconPtt from '../icons/IconPtt.vue';
 			<div>
 				<BaseAvatar />
 
-				<h3>Hola</h3>
+				<h3>{{ chat.user }}</h3>
 			</div>
 
 			<div class="actions">
@@ -30,12 +46,7 @@ import IconPtt from '../icons/IconPtt.vue';
 		</header>
 
 		<div class="conversation__panel">
-			<BaseMessage is-in />
-			<BaseMessage is-out />
-			<BaseMessage is-out />
-			<BaseMessage is-out />
-			<BaseMessage is-in />
-			<BaseMessage is-out />
+			<BaseMessage v-for="message in data" :message="message" is-in />
 		</div>
 
 		<footer class="conversation__footer">

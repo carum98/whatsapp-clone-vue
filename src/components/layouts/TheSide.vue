@@ -6,6 +6,13 @@ import IconStatus from '../icons/IconStatus.vue';
 import IconMessage from '../icons/IconMessage.vue';
 import IconMoreVert from '../icons/IconMoreVert.vue';
 import IconSearch from '../icons/IconSearch.vue';
+import { useFetch } from '../../composables/useFetch';
+import { useChat } from '../../composables/useChat';
+
+import Chat from '../../models/Chats';
+
+const { data } = useFetch({ url: 'chats', classInstance: Chat });
+const { setChat } = useChat();
 
 </script>
 
@@ -36,7 +43,7 @@ import IconSearch from '../icons/IconSearch.vue';
 			</div>
 		</div>
 		<div class="chats">
-			<BaseChat v-for="i in 35" />
+			<BaseChat v-for="chat in data" :chat="chat" @click="setChat(chat)" />
 		</div>
 	</section>
 </template>

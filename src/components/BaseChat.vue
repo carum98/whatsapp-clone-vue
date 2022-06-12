@@ -1,6 +1,14 @@
 <script setup>
+import Chat from '../models/Chats';
 import BaseAvatar from './BaseAvatar.vue';
 import IconCheck from './icons/IconCheck.vue';
+
+defineProps({
+	chat: {
+		type: Chat,
+		required: true,
+	}
+})
 
 </script>
 
@@ -12,15 +20,17 @@ import IconCheck from './icons/IconCheck.vue';
 
 		<div class="chat__content">
 			<div>
-				<h1 class="chat__content--name">Nombre</h1>
-				<spam class="chat__content--date">lunes</spam>
+				<h1 class="chat__content--name">{{ chat.user }}</h1>
+				<span class="chat__content--date">{{ chat.date }}</span>
 			</div>
 			<div>
 				<p class="chat__content--message">
 					<IconCheck />
-					Mensaje
+					{{ chat.lastMessage }}
 				</p>
-				<span class="chat__content--counter">2</span>
+				<span class="chat__content--counter">
+					2
+				</span>
 			</div>
 		</div>
 	</article>
