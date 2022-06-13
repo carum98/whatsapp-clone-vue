@@ -46,7 +46,7 @@ const { data } = useFetch({
 		</header>
 
 		<div class="conversation__panel">
-			<BaseMessage v-for="message in data" :message="message" is-in />
+			<BaseMessage v-for="message in data" :message="message" />
 		</div>
 
 		<footer class="conversation__footer">
