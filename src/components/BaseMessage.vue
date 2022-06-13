@@ -14,12 +14,12 @@ defineProps({
 </script>
 
 <template>
-	<div class="message" :class="{ 'in': message.isMine, 'out': !message.isMine }">
+	<div class="message" :class="{ 'in': !message.isMine, 'out': message.isMine }">
 		<div>
 			<p>{{ message.content }}</p>
 			<span>
 				{{ formatTime(message.date) }}
-				<IconCheck v-if="!message.isMine" />
+				<IconCheck v-if="message.isMine" />
 			</span>
 		</div>
 	</div>
