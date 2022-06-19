@@ -11,6 +11,9 @@
 	--bg-message-textarea: #2a3942;
 
 	--border-color: #8696a026;
+
+	--bg-message-in: #1f2c33;
+	--bg-message-out: #015d4b;
 }
 
 [data-theme="light"] {
@@ -26,6 +29,9 @@
 	--bg-message-textarea: #fefefe;
 
 	--border-color: #d1d7db;
+
+	--bg-message-in: #fff;
+	--bg-message-out: #d9fdd3;
 }
 
 $bg-color: var(--bg-color);
@@ -37,3 +43,5 @@ $bg-stripe: var(--bg-stripe);
 $border-color: var(--border-color);
 $bg-message-textarea: var(--bg-message-textarea);
 $bg-conversation: var(--bg-conversation);
+$bg-message-in: var(--bg-message-in);
+$bg-message-out: var(--bg-message-out);

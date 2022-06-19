@@ -4,7 +4,11 @@
 	padding-left: 9%;
 
 	>div {
-		color: #fff;
+		box-shadow: 0 1px 0.5px rgba(11, 20, 26, .13);
+	}
+
+	>div {
+		color: $font-color;
 
 		margin: 15px;
 		padding: 6px 7px 8px 9px;
@@ -41,15 +45,14 @@
 
 
 		>div {
-			$color: #1f2c33;
-			background: $color;
+			background: $bg-message-in;
 
 			&::before {
 				left: -10px;
 
-				border-top: $border-radius solid $color;
+				border-top: $border-radius solid $bg-message-in;
 				border-left: $border-radius solid transparent;
-				border-right: $border-radius solid $color;
+				border-right: $border-radius solid $bg-message-in;
 				border-bottom: $border-radius solid transparent;
 
 				border-top-left-radius: 6px;
@@ -62,13 +65,13 @@
 
 		>div {
 			$color: #015d4b;
-			background: $color;
+			background: $bg-message-out;
 
 			&::before {
 				right: -8px;
 
-				border-top: $border-radius solid $color;
-				border-left: $border-radius solid $color;
+				border-top: $border-radius solid $bg-message-out;
+				border-left: $border-radius solid $bg-message-out;
 				border-right: $border-radius solid transparent;
 				border-bottom: $border-radius solid transparent;
 
