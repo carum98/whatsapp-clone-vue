@@ -2,12 +2,12 @@ import { io } from "socket.io-client";
 import { onUnmounted } from "vue";
 import { useAuth } from "./useAuth";
 
-export function useSocket(clientId) {
+export function useSocket(chatId) {
 	const { token } = useAuth();
 
 	const socket = io.connect("http://localhost:3001/chats", {
 		auth: { token },
-		query: { chat_id: clientId },
+		query: { chat_id: chatId },
 	});
 
 	const sendTyping = () => {
@@ -18,19 +18,17 @@ export function useSocket(clientId) {
 		console.log(payload.user)
 	})
 
-	socket.on('chat:typing', () => {
-		console.log("typing")
-	})
-
-	socket.on('chat:message', (payload) => {
-		console.log(payload)
-	})
-
 	onUnmounted(() => {
 		socket.disconnect();
 	})
 
 	return {
 		sendTyping,
+		onTyping: (callback) => {
+			socket.on('chat:typing', callback);
+		},
+		onMessage: (callback) => {
+			socket.on('chat:message', callback);
+		}
 	}
 }

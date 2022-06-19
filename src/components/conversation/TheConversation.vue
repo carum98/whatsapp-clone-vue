@@ -16,6 +16,9 @@ import { useFetch } from '../../composables/useFetch';
 import { useSocket } from '../../composables/useSocket';
 import { ref } from 'vue';
 
+const typing = ref(false);
+const message = ref('');
+
 const props = defineProps({
 	chat: {
 		type: Chat,
@@ -23,22 +26,21 @@ const props = defineProps({
 	},
 });
 
+const { sendTyping, onTyping, onMessage } = useSocket(props.chat.id);
+
 const { data, onRefresh } = useFetch({
 	url: `chats/${props.chat.id}/messages`,
 	classInstance: Message
 });
 
-const { sendTyping } = useSocket(props.chat.id, onRefresh);
+onTyping(() => {
+	typing.value = !typing.value;
+});
 
-const focusIn = () => {
-	sendTyping();
-};
+onMessage(() => {
+	onRefresh();
+});
 
-const focusOut = () => {
-	sendTyping();
-};
-
-const message = ref('');
 const send = () => {
 	useFetch({
 		url: `messages`,
@@ -58,7 +60,10 @@ const send = () => {
 			<div>
 				<BaseAvatar />
 
-				<h3>{{ chat.user }}</h3>
+				<div>
+					<h4>{{ chat.user }}</h4>
+					<span v-if="typing">Escribiendo...</span>
+				</div>
 			</div>
 
 			<div class="actions">
@@ -83,8 +88,8 @@ const send = () => {
 				<IconClip />
 			</button>
 			<div class="conversation__footer--message">
-				<textarea v-model="message" placeholder="Escribe un mensaje aqui" @focusin="focusIn"
-					@focusout="focusOut"></textarea>
+				<textarea v-model="message" placeholder="Escribe un mensaje aqui" @focusin="sendTyping"
+					@focusout="sendTyping"></textarea>
 			</div>
 			<button v-if="message.length === 0">
 				<IconPtt />

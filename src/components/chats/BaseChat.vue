@@ -1,9 +1,9 @@
 <script setup>
-import { useDate } from '../composables/useDate';
+import { useDate } from '../../composables/useDate';
 
-import Chat from '../models/Chats';
-import BaseAvatar from './BaseAvatar.vue';
-import IconCheck from './icons/IconCheck.vue';
+import Chat from '../../models/Chats';
+import BaseAvatar from '../BaseAvatar.vue';
+import IconCheck from '../icons/IconCheck.vue';
 
 const { formatTime } = useDate();
 

@@ -2,29 +2,17 @@ import { ref } from 'vue'
 import { useAuth } from './useAuth'
 
 export function useFetch({ url, method = 'GET', classInstance, param }) {
-	const { token } = useAuth()
-
 	const data = ref(null)
 	const error = ref(null)
 
 	const fetchData = () => {
-		fetch(new URL(url, 'http://localhost:3001/api/'), {
-			method,
-			headers: {
-				'Content-Type': 'application/json',
-				'Authorization': token
-			},
-			body: JSON.stringify(param)
-		})
-			.then((res) => res.json())
-			.then((json) => {
-				let value = json['data'].map(v => new classInstance(v))
-
-				data.value = value
-
-				console.log(value)
+		useFetchData({ url, method, param })
+			.then(res => {
+				data.value = res.map(v => new classInstance(v))
 			})
-			.catch((err) => (error.value = err))
+			.catch(error => {
+				error.value = error
+			})
 	}
 
 	const onRefresh = () => {
@@ -38,4 +26,26 @@ export function useFetch({ url, method = 'GET', classInstance, param }) {
 		error,
 		onRefresh,
 	}
+}
+
+export function useFetchData({ url, method, param }) {
+	const { token } = useAuth()
+
+	return new Promise((resolve, reject) => {
+		fetch(new URL(url, 'http://localhost:3001/api/'), {
+			method,
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': token
+			},
+			body: JSON.stringify(param)
+		})
+			.then((res) => res.json())
+			.then((json) => {
+				resolve(json['data'])
+			})
+			.catch((err) => (
+				reject(err)
+			))
+	})
 }
