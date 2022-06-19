@@ -19,7 +19,7 @@ defineProps({
 <template>
 	<article class="chat">
 		<div class="chat__avatar">
-			<BaseAvatar :size="49" />
+			<BaseAvatar :size="49" :path="chat.image" />
 		</div>
 
 		<div class="chat__content">

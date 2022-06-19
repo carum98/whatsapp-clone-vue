@@ -3,5 +3,6 @@ export default class Contacts {
 		this.id = data.id
 		this.name = data.name
 		this.number = data.number
+		this.image = data.image
 	}
 }

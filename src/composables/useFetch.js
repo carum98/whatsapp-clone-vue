@@ -8,7 +8,7 @@ export function useFetch({ url, method = 'GET', classInstance, param }) {
 	const fetchData = () => {
 		useFetchData({ url, method, param })
 			.then(res => {
-				data.value = res.map(v => new classInstance(v))
+				data.value = Array.isArray(res) ? res.map(v => new classInstance(v)) : new classInstance(res)
 			})
 			.catch(error => {
 				error.value = error
@@ -48,4 +48,21 @@ export function useFetchData({ url, method, param }) {
 				reject(err)
 			))
 	})
+}
+
+export function useFethImage(image) {
+	const { token } = useAuth()
+	const src = ref(null)
+
+	fetch(new URL(image, 'http://localhost:3001/images/'), {
+		headers: { 'Authorization': token }
+	})
+		.then(res => res.blob())
+		.then(blob => {
+			src.value.src = URL.createObjectURL(blob)
+		})
+
+	return {
+		src,
+	}
 }

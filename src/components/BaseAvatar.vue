@@ -1,26 +1,29 @@
 <script setup>
+import { computed } from '@vue/reactivity';
+import { useFethImage } from '../composables/useFetch';
+
 const props = defineProps({
-	avatar: {
-		type: String,
-		default: 'https://i.pravatar.cc/300'
-	},
 	size: {
 		type: Number,
 		default: 40
+	},
+	path: {
+		type: String,
 	}
 });
 
-let sizePx = props.size + 'px';
+const { src } = useFethImage(props.path);
+const size = computed(() => props.size + 'px');
 </script>
 
 <template>
-	<img :src="avatar" class="avatar" />
+	<img ref="src" class="avatar" />
 </template>
 
 <style scoped lang="scss">
 .avatar {
-	width: v-bind(sizePx);
-	height: v-bind(sizePx);
+	width: v-bind(size);
+	height: v-bind(size);
 	border-radius: 50%;
 }
 </style>

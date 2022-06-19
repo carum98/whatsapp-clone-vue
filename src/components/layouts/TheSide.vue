@@ -1,14 +1,14 @@
 <script setup>
-import { ref } from 'vue';
-import TheChats from '../chats/TheChats.vue'
-import TheContacts from '../contacts/TheContacts.vue'
+import { useSideRouter } from '../../composables/useSideRouter';
 
-const toggle = ref(true)
+const { component, push } = useSideRouter()
+push('chats')
 </script>
 
 <template>
 	<section id="side">
-		<TheChats v-if="toggle" @open="toggle = false" />
-		<TheContacts v-else @close="toggle = true" />
+		<keep-alive>
+			<component :is="component" />
+		</keep-alive>
 	</section>
 </template>

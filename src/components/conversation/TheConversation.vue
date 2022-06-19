@@ -58,7 +58,7 @@ const send = () => {
 	<div class="conversation">
 		<header class="conversation__header">
 			<div>
-				<BaseAvatar />
+				<BaseAvatar :path="chat.image" />
 
 				<div>
 					<h4>{{ chat.user }}</h4>

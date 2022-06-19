@@ -8,6 +8,9 @@ import { useChat } from '../../composables/useChat'
 import Contacts from '../../models/Contacts'
 import BaseContact from './BaseContact.vue';
 import Chat from '../../models/Chats'
+import { useSideRouter } from '../../composables/useSideRouter'
+
+const { pop } = useSideRouter()
 
 const { data } = useFetch({ url: 'contacts', classInstance: Contacts })
 const { setChat } = useChat()
@@ -17,19 +20,12 @@ const openChat = async (contact) => {
 
 	setChat(new Chat(res))
 }
-
-defineEmits({
-	'close': {
-		type: Boolean,
-		required: true,
-	}
-})
 </script>
 
 <template>
 	<header></header>
 	<header>
-		<button @click="$emit('close')">
+		<button @click="pop">
 			<IconArrowLeft />
 		</button>
 		<h3 style="margin-left: 20px;">Nuevo chat</h3>

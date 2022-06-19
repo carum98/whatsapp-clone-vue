@@ -8,30 +8,30 @@ import IconMoreVert from '../icons/IconMoreVert.vue'
 import IconSearch from '../icons/IconSearch.vue'
 import { useFetch } from '../../composables/useFetch'
 import { useChat } from '../../composables/useChat'
+import { useSideRouter } from '../../composables/useSideRouter'
 
 import Chat from '../../models/Chats'
+import Contacts from '../../models/Contacts'
 
 const { data } = useFetch({ url: 'chats', classInstance: Chat })
-const { setChat } = useChat()
+const { data: self } = useFetch({ url: 'self', classInstance: Contacts })
 
-defineEmits({
-	'open': {
-		type: Boolean,
-		required: true,
-	}
-})
+const { setChat } = useChat()
+const { push } = useSideRouter()
 </script>
 
 <template>
 	<header>
 		<div>
-			<BaseAvatar />
+			<button @click="push('profile')">
+				<BaseAvatar v-if="self" :path="self.image" />
+			</button>
 		</div>
 		<div class="actions">
 			<button>
 				<IconStatus />
 			</button>
-			<button @click="$emit('open')">
+			<button @click="push('contacts')">
 				<IconMessage />
 			</button>
 			<button>
