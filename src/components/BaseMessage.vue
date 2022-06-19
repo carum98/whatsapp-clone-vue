@@ -19,7 +19,7 @@ defineProps({
 			<p>{{ message.content }}</p>
 			<span>
 				{{ formatTime(message.date) }}
-				<IconCheck v-if="message.isMine" />
+				<IconCheck v-if="message.isMine" :is-read="message.isRead" />
 			</span>
 		</div>
 	</div>

@@ -25,15 +25,17 @@ defineProps({
 		<div class="chat__content">
 			<div>
 				<h1 class="chat__content--name">{{ chat.user }}</h1>
-				<span class="chat__content--date">{{ formatTime(chat.date) }}</span>
+				<span class="chat__content--date">
+					{{ chat.message.date ? formatTime(chat.message.date) : '' }}
+				</span>
 			</div>
 			<div>
 				<p class="chat__content--message">
-					<IconCheck />
-					{{ chat.message }}
+					<IconCheck v-if="chat.message.isMine" :is-read="chat.message.isRead" />
+					{{ chat.message.content }}
 				</p>
-				<span class="chat__content--counter">
-					2
+				<span v-if="chat.count > 0" class="chat__content--counter">
+					{{ chat.count }}
 				</span>
 			</div>
 		</div>

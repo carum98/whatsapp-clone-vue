@@ -3,6 +3,17 @@ export default class Message {
 		this.id = data.id
 		this.content = data.content
 		this.isMine = data.isMine
-		this.date = new Date(data.createdAt)
+		this.date = data.createdAt ? new Date(data.createdAt) : null
+		this.isRead = data.isRead
+	}
+
+	static Empty() {
+		return new Message({
+			id: null,
+			content: "No hay mensajes",
+			isMine: false,
+			createdAt: null,
+			isRead: false,
+		})
 	}
 }
