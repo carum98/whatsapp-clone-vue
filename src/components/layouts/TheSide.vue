@@ -8,7 +8,7 @@ push('chats')
 <template>
 	<section id="side">
 		<keep-alive>
-			<component :is="component" />
+			<component :is="component" :key="component" />
 		</keep-alive>
 	</section>
 </template>

@@ -12,12 +12,20 @@ import { useSideRouter } from '../../composables/useSideRouter'
 
 import Chat from '../../models/Chats'
 import Contacts from '../../models/Contacts'
+import { useSocketUpdates } from '../../composables/useSocket'
 
-const { data } = useFetch({ url: 'chats', classInstance: Chat })
+const { data, onRefresh } = useFetch({ url: 'chats', classInstance: Chat })
 const { data: self } = useFetch({ url: 'self', classInstance: Contacts })
 
 const { setChat } = useChat()
 const { push } = useSideRouter()
+
+const { onUpdate } = useSocketUpdates()
+
+onUpdate(() => {
+	onRefresh()
+})
+
 </script>
 
 <template>
