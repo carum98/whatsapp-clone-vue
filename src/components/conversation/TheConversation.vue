@@ -12,7 +12,7 @@ import IconClip from '../icons/IconClip.vue';
 import IconPtt from '../icons/IconPtt.vue';
 import IconSend from '../icons/IconSend.vue';
 
-import { useFetch } from '../../composables/useFetch';
+import { useFetch, useFetchData } from '../../composables/useFetch';
 import { useSocket } from '../../composables/useSocket';
 import { ref } from 'vue';
 
@@ -28,28 +28,32 @@ const props = defineProps({
 
 const { sendTyping, onTyping, onMessage } = useSocket(props.chat.id);
 
-const { data, onRefresh } = useFetch({
+const { data } = useFetch({
 	url: `chats/${props.chat.id}/messages`,
 	classInstance: Message
-});
+})
 
 onTyping(() => {
 	typing.value = !typing.value;
-});
+})
 
-onMessage(() => {
-	onRefresh();
-});
+onMessage(async ({ message_id }) => {
+	const message = await useFetchData({ url: `messages/${message_id}` })
+	data.value.unshift(new Message(message))
+})
 
 const send = () => {
-	useFetch({
+	useFetchData({
 		url: `messages`,
 		method: 'POST',
 		param: {
 			content: message.value,
 			chat_id: props.chat.id,
 		},
-	});
+	})
+		.then(response => {
+			message.value = ''
+		})
 }
 
 </script>

@@ -13,8 +13,9 @@ import { useSideRouter } from '../../composables/useSideRouter'
 import Chat from '../../models/Chats'
 import Contacts from '../../models/Contacts'
 import { useSocketUpdates } from '../../composables/useSocket'
+import Message from '../../models/Messages'
 
-const { data, onRefresh } = useFetch({ url: 'chats', classInstance: Chat })
+const { data } = useFetch({ url: 'chats', classInstance: Chat })
 const { data: self } = useFetch({ url: 'self', classInstance: Contacts })
 
 const { setChat } = useChat()
@@ -22,10 +23,21 @@ const { push } = useSideRouter()
 
 const { onUpdate } = useSocketUpdates()
 
-onUpdate(() => {
-	onRefresh()
+onUpdate(({ message, chat_id }) => {
+	let chat = data.value.find(chat => chat.id === chat_id)
+
+	chat.message = new Message(message)
+
+	if (!chat.message.isMine) {
+		chat.count = chat.count + 1
+	}
 })
 
+const openChat = (chat) => {
+	setChat(chat)
+
+	data.value.find((chatt) => chatt.id === chat.id).count = 0
+}
 </script>
 
 <template>
@@ -56,6 +68,6 @@ onUpdate(() => {
 		</div>
 	</div>
 	<div class="list">
-		<BaseChat v-for="chat in data" :chat="chat" @click="setChat(chat)" />
+		<BaseChat v-for="chat in data" :chat="chat" @click="openChat(chat)" />
 	</div>
 </template>
