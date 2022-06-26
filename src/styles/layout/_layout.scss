@@ -1,4 +1,4 @@
-#app {
+.layout-main {
 	display: flex;
 
 	width: calc(100% - 38px);
@@ -15,6 +15,10 @@
 		height: 100%;
 		top: 0;
 	}
+}
+
+.layout-landing {
+	height: 100%;
 }
 
 body::before {
