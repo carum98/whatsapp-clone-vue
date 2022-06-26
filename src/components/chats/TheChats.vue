@@ -21,7 +21,7 @@ const { data: self } = useFetch({ url: 'self', classInstance: Contacts })
 const { chat: current_chat, setChat } = useChat()
 const { push } = useSideRouter()
 
-const { onUpdate, onRead } = onUpdates()
+const { onUpdate, onRead, onNewChat } = onUpdates()
 
 onUpdate(({ message, chat_id }) => {
 	let chat = data.value.find(chat => chat.id === chat_id)
@@ -38,6 +38,10 @@ onRead(({ chat_id }) => {
 
 	chat.count = 0
 	chat.message.isRead = true
+})
+
+onNewChat(chat => {
+	data.value.unshift(new Chat(chat))
 })
 
 const openChat = (chat) => {
@@ -75,6 +79,6 @@ const openChat = (chat) => {
 		</div>
 	</div>
 	<div class="list">
-		<BaseChat v-for="chat in data" :chat="chat" @click="openChat(chat)" />
+		<BaseChat v-for="chat in data" :key="chat.id" :chat="chat" @click="openChat(chat)" />
 	</div>
 </template>

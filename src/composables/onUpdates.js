@@ -17,6 +17,9 @@ export function onUpdates() {
 			socket.on('updates:read', (payload) => {
 				payload.forEach(callback)
 			})
+		},
+		onNewChat: (callback) => {
+			socket.on('updates:chat', callback)
 		}
 	}
 }

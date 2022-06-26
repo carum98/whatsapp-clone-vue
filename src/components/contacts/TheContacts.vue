@@ -19,6 +19,8 @@ const openChat = async (contact) => {
 	const res = await useFetchData({ url: 'chats', method: 'POST', param: { number: contact.number } })
 
 	setChat(new Chat(res))
+
+	pop()
 }
 </script>
 

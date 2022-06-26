@@ -100,7 +100,7 @@ const send = () => {
 			</button>
 			<div class="conversation__footer--message">
 				<textarea v-model="message" placeholder="Escribe un mensaje aqui" @focusin="sendTyping"
-					@focusout="sendTyping"></textarea>
+					@focusout="sendTyping" @keyup.enter="send"></textarea>
 			</div>
 			<button v-if="message.length === 0">
 				<IconPtt />
