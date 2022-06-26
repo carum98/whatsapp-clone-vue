@@ -12,25 +12,32 @@ import { useSideRouter } from '../../composables/useSideRouter'
 
 import Chat from '../../models/Chats'
 import Contacts from '../../models/Contacts'
-import { useSocketUpdates } from '../../composables/useSocket'
+import { onUpdates } from '../../composables/onUpdates'
 import Message from '../../models/Messages'
 
 const { data } = useFetch({ url: 'chats', classInstance: Chat })
 const { data: self } = useFetch({ url: 'self', classInstance: Contacts })
 
-const { setChat } = useChat()
+const { chat: current_chat, setChat } = useChat()
 const { push } = useSideRouter()
 
-const { onUpdate } = useSocketUpdates()
+const { onUpdate, onRead } = onUpdates()
 
 onUpdate(({ message, chat_id }) => {
 	let chat = data.value.find(chat => chat.id === chat_id)
 
 	chat.message = new Message(message)
 
-	if (!chat.message.isMine) {
+	if (!chat.message.isMine && (current_chat?.value?.id !== chat_id)) {
 		chat.count = chat.count + 1
 	}
+})
+
+onRead(({ chat_id }) => {
+	let chat = data.value.find(chat => chat.id === chat_id)
+
+	chat.count = 0
+	chat.message.isRead = true
 })
 
 const openChat = (chat) => {

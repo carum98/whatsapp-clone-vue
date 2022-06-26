@@ -14,6 +14,7 @@ import IconSend from '../icons/IconSend.vue';
 
 import { useFetch, useFetchData } from '../../composables/useFetch';
 import { useSocket } from '../../composables/useSocket';
+import { onUpdates } from '../../composables/onUpdates';
 import { ref } from 'vue';
 
 const typing = ref(false);
@@ -26,7 +27,8 @@ const props = defineProps({
 	},
 });
 
-const { sendTyping, onTyping, onMessage } = useSocket(props.chat.id);
+const { sendTyping, onTyping, onMessage } = useSocket(props.chat.id)
+const { onRead } = onUpdates()
 
 const { data } = useFetch({
 	url: `chats/${props.chat.id}/messages`,
@@ -37,9 +39,14 @@ onTyping(() => {
 	typing.value = !typing.value;
 })
 
-onMessage(async ({ message_id }) => {
-	const message = await useFetchData({ url: `messages/${message_id}` })
+onMessage(message => {
 	data.value.unshift(new Message(message))
+})
+
+onRead(({ chat_id, message_id }) => {
+	if (chat_id === props.chat.id) {
+		data.value.find(message => message.id === message_id).isRead = true
+	}
 })
 
 const send = () => {
