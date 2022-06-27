@@ -1,35 +1,10 @@
 <script setup>
 import { ref } from 'vue';
+import { useAuth } from '../composables/useAuth';
 
 const isLogin = ref(true)
 
-const login = async (event) => {
-	const formData = new FormData(event.target)
-	const formProps = Object.fromEntries(formData)
-
-	const response = await fetch(new URL('login', 'http://localhost:3001/api/'), {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(formProps)
-	})
-
-	const data = await response.json()
-	console.log(data)
-}
-
-const register = async (event) => {
-	const formData = new FormData(event.target)
-
-	const response = await fetch(new URL('register', 'http://localhost:3001/api/'), {
-		method: 'POST',
-		body: formData
-	})
-
-	const data = await response.json()
-	console.log(data)
-}
+const { login, register } = useAuth()
 </script>
 
 <template>

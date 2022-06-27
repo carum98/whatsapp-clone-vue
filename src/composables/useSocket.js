@@ -7,7 +7,7 @@ export function useSocket(chatId) {
 	const { token } = useAuth()
 
 	const socket = io("http://localhost:3001/chats", {
-		auth: { token },
+		auth: { token: token.value },
 		query: { chat_id: chatId },
 		forceNew: true,
 	});

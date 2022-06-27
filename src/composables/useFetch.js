@@ -29,14 +29,14 @@ export function useFetch({ url, method = 'GET', classInstance, param }) {
 }
 
 export function useFetchData({ url, method, param }) {
-	const { token } = useAuth()
+	const { token, logout } = useAuth()
 
 	return new Promise((resolve, reject) => {
 		fetch(new URL(url, 'http://localhost:3001/api/'), {
 			method,
 			headers: {
 				'Content-Type': 'application/json',
-				'Authorization': token
+				'Authorization': token.value
 			},
 			body: JSON.stringify(param)
 		})
@@ -44,9 +44,10 @@ export function useFetchData({ url, method, param }) {
 			.then((json) => {
 				resolve(json['data'])
 			})
-			.catch((err) => (
+			.catch((err) => {
+				logout()
 				reject(err)
-			))
+			})
 	})
 }
 
@@ -55,7 +56,7 @@ export function useFethImage(image) {
 	const src = ref(null)
 
 	fetch(new URL(image, 'http://localhost:3001/images/'), {
-		headers: { 'Authorization': token }
+		headers: { 'Authorization': token.value }
 	})
 		.then(res => res.blob())
 		.then(blob => {

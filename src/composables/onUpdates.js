@@ -4,7 +4,7 @@ import { useAuth } from "./useAuth";
 const { token } = useAuth()
 
 const socket = io("http://localhost:3001/updates", {
-	auth: { token },
+	auth: { token: token.value },
 	forceNew: true,
 })
 
@@ -20,6 +20,9 @@ export function onUpdates() {
 		},
 		onNewChat: (callback) => {
 			socket.on('updates:chat', callback)
+		},
+		disconnect: () => {
+			socket.disconnect()
 		}
 	}
 }

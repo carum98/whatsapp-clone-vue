@@ -14,6 +14,9 @@ import Chat from '../../models/Chats'
 import Contacts from '../../models/Contacts'
 import { onUpdates } from '../../composables/onUpdates'
 import Message from '../../models/Messages'
+import { useAuth } from '../../composables/useAuth'
+
+const { logout } = useAuth()
 
 const { data } = useFetch({ url: 'chats', classInstance: Chat })
 const { data: self } = useFetch({ url: 'self', classInstance: Contacts })
@@ -65,7 +68,7 @@ const openChat = (chat) => {
 			<button @click="push('contacts')">
 				<IconMessage />
 			</button>
-			<button>
+			<button @click="logout">
 				<IconMoreVert />
 			</button>
 		</div>
