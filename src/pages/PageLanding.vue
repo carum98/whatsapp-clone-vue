@@ -1,5 +1,10 @@
 <script setup>
+import { ref } from 'vue';
 import BaseQr from '../components/BaseQr.vue';
+import BaseModal from '../components/utils/BaseModal.vue';
+import PageLogin from './PageLogin.vue';
+
+const modal = ref(null)
 </script>
 
 <template>
@@ -19,6 +24,12 @@ import BaseQr from '../components/BaseQr.vue';
 						<li>Cuando se active la cámara, apunta tu teléfono hacia esta pantalla para escanear el código
 						</li>
 					</ol>
+
+					<a @click="modal.open">Iniciar sesión</a>
+
+					<BaseModal ref="modal">
+						<PageLogin />
+					</BaseModal>
 				</section>
 				<section>
 					<BaseQr />
