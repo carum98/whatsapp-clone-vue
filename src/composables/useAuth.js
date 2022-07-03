@@ -3,8 +3,7 @@ import { ref, computed } from "vue"
 const token = ref(localStorage.getItem('token'))
 
 export function useAuth() {
-	const setToken = async (response) => {
-		const data = await response.json()
+	const setToken = (data) => {
 		localStorage.setItem('token', data.token)
 		token.value = data.token
 	}
@@ -20,7 +19,7 @@ export function useAuth() {
 		})
 
 		if (response.ok) {
-			await setToken(response)
+			setToken(await response.json())
 		}
 	}
 
@@ -31,7 +30,7 @@ export function useAuth() {
 		})
 
 		if (response.ok) {
-			await setToken(response)
+			setToken(await response.json())
 		}
 	}
 
@@ -50,5 +49,6 @@ export function useAuth() {
 		login,
 		register,
 		logout,
+		setToken,
 	}
 }
