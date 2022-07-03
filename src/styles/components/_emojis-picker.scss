@@ -1,0 +1,47 @@
+.emojis-picker {
+	>label {
+		display: block;
+	}
+
+	&__tabs {
+		display: flex;
+
+		button {
+			flex: 1;
+			padding: 10px 0;
+			background: $bg-side-header;
+
+			&.active {
+				border-bottom: 5px solid $bg-message-out;
+			}
+		}
+	}
+
+	&__content {
+		height: 250px;
+		overflow-y: scroll;
+		padding-top: 20px;
+
+		>section {
+			label {
+				color: #8696a0;
+				margin-left: 15px;
+				font-size: 14px;
+			}
+
+			div {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 15px;
+				padding: 15px;
+				overflow-y: scroll;
+
+				span {
+					cursor: pointer;
+					font-size: 1.8rem;
+				}
+			}
+		}
+	}
+
+}

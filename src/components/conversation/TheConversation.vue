@@ -16,9 +16,11 @@ import { useFetch, useFetchData } from '../../composables/useFetch';
 import { useSocket } from '../../composables/useSocket';
 import { onUpdates } from '../../composables/onUpdates';
 import { ref } from 'vue';
+import EmojisPicker from '../emojis/EmojisPicker.vue';
 
-const typing = ref(false);
-const message = ref('');
+const typing = ref(false)
+const message = ref('')
+const expanded = ref(false)
 
 const props = defineProps({
 	chat: {
@@ -63,6 +65,10 @@ const send = () => {
 		})
 }
 
+const addEmoji = (emoji) => {
+	message.value += emoji
+}
+
 </script>
 
 <template>
@@ -87,20 +93,24 @@ const send = () => {
 			</div>
 		</header>
 
-		<div class="conversation__panel">
+		<div class="conversation__content" :class="{ expanded }">
 			<BaseMessage v-for="message in data" :message="message" />
 		</div>
 
+		<div v-if="expanded" class="conversation__expand">
+			<EmojisPicker @input="addEmoji" />
+		</div>
+
 		<footer class="conversation__footer">
-			<button>
+			<button @click="expanded = !expanded">
 				<IconSmile />
 			</button>
 			<button>
 				<IconClip />
 			</button>
 			<div class="conversation__footer--message">
-				<textarea v-model="message" placeholder="Escribe un mensaje aqui" @focusin="sendTyping"
-					@focusout="sendTyping" @keyup.enter="send"></textarea>
+				<input v-model="message" placeholder="Escribe un mensaje aqui" @focusin="sendTyping"
+					@focusout="sendTyping" @keyup.enter="send" />
 			</div>
 			<button v-if="message.length === 0">
 				<IconPtt />

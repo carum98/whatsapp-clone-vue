@@ -40,11 +40,15 @@ export function useFetchData({ url, method, param }) {
 			},
 			body: JSON.stringify(param)
 		})
-			.then((res) => res.json())
-			.then((json) => {
+			.then(res => {
+				if (!res.ok) throw new Error('Error')
+
+				return res.json()
+			})
+			.then(json => {
 				resolve(json['data'])
 			})
-			.catch((err) => {
+			.catch(err => {
 				logout()
 				reject(err)
 			})
