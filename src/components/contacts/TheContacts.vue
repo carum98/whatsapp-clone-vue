@@ -16,7 +16,7 @@ const { data } = useFetch({ url: 'contacts', classInstance: Contacts })
 const { setChat } = useChat()
 
 const openChat = async (contact) => {
-	const res = await useFetchData({ url: 'chats', method: 'POST', param: { number: contact.number } })
+	const res = await useFetchData({ url: 'chats', method: 'POST', param: { user_id: contact.id } })
 
 	setChat(new Chat(res))
 
