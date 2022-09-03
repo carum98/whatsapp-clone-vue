@@ -16,13 +16,12 @@ const modal = ref(null)
 		<main class="landing__content">
 			<div class="landing__content--main">
 				<section>
-					<p>Para usar WhatsApp en tu computadora:</p>
+					<p>To use WhatsApp-Clone on your computer:</p>
 
 					<ol>
-						<li>Abre WhatsApp en tu teléfono</li>
-						<li>Toca</li>
-						<li>Cuando se active la cámara, apunta tu teléfono hacia esta pantalla para escanear el código
-						</li>
+						<li>Open WhatsApp-Clone on your phone</li>
+						<li>Tap scan code</li>
+						<li>When the camera is activated, point your phone at this screen to scan the code</li>
 					</ol>
 
 					<a @click="modal.open">Iniciar sesión</a>
