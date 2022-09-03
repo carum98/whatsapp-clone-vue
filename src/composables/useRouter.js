@@ -1,11 +1,8 @@
-import { ref, computed, markRaw } from "vue"
-
-import PageMain from '../pages/PageMain.vue';
-import PageLanding from '../pages/PageLanding.vue';
+import { ref, computed, defineAsyncComponent } from "vue"
 
 const routes = [
-	{ name: 'main', component: markRaw(PageMain) },
-	{ name: 'landing', component: markRaw(PageLanding) },
+	{ name: 'main', component: defineAsyncComponent(() => import('../pages/PageMain.vue')) },
+	{ name: 'landing', component: defineAsyncComponent(() => import('../pages/PageLanding.vue')) },
 ]
 
 const history = ref([])
