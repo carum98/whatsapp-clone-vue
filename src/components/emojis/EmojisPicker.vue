@@ -11,7 +11,7 @@ import IconFlag from '../icons/IconFlag.vue';
 const data = ref([])
 const selected = ref(0)
 
-fetch(new URL('emojis', 'http://localhost:3001/api/'))
+fetch(new URL('emojis', 'https://chat-api.carum.dev/api/'))
 	.then(response => response.json())
 	.then(emojis => {
 		data.value = emojis

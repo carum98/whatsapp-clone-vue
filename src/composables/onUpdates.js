@@ -3,7 +3,7 @@ import { useAuth } from "./useAuth";
 
 const { token } = useAuth()
 
-const socket = io("http://localhost:3001/updates", {
+const socket = io("https://chat-api.carum.dev/updates", {
 	auth: { token: token.value },
 	forceNew: true,
 })

@@ -32,7 +32,7 @@ export function useFetchData({ url, method, param }) {
 	const { token, logout } = useAuth()
 
 	return new Promise((resolve, reject) => {
-		fetch(new URL(url, 'http://localhost:3001/api/'), {
+		fetch(new URL(url, 'https://chat-api.carum.dev/api/'), {
 			method,
 			headers: {
 				'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ export function useFethImage(image) {
 	const { token } = useAuth()
 	const src = ref(null)
 
-	fetch(new URL(image, 'http://localhost:3001/images/'), {
+	fetch(new URL(image, 'https://chat-api.carum.dev/images/'), {
 		headers: { 'Authorization': token.value }
 	})
 		.then(res => res.blob())

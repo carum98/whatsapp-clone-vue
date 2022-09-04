@@ -6,7 +6,7 @@ import { useAuth } from '../composables/useAuth';
 const src = ref(null)
 const { setToken } = useAuth()
 
-const socket = io('http://localhost:3001/qr')
+const socket = io('https://chat-api.carum.dev/qr')
 
 socket.on('connect', () => getQR(socket.id))
 
@@ -17,7 +17,7 @@ onUnmounted(() => {
 })
 
 const getQR = async (code) => {
-	const res = await fetch(new URL('qr', 'http://localhost:3001/api/'), {
+	const res = await fetch(new URL('qr', 'https://chat-api.carum.dev/api/'), {
 		method: 'POST',
 		body: JSON.stringify({ code }),
 		headers: {

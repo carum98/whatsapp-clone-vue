@@ -12,7 +12,7 @@ export function useAuth() {
 		const formData = new FormData(event.target)
 		const formProps = Object.fromEntries(formData)
 
-		const response = await fetch(new URL('login', 'http://localhost:3001/api/'), {
+		const response = await fetch(new URL('login', 'https://chat-api.carum.dev/api/'), {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(formProps)
@@ -24,7 +24,7 @@ export function useAuth() {
 	}
 
 	const register = async (event) => {
-		const response = await fetch(new URL('register', 'http://localhost:3001/api/'), {
+		const response = await fetch(new URL('register', 'https://chat-api.carum.dev/api/'), {
 			method: 'POST',
 			body: new FormData(event.target)
 		})

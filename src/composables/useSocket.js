@@ -6,7 +6,7 @@ import { useFetchData } from "./useFetch";
 export function useSocket(chatId) {
 	const { token } = useAuth()
 
-	const socket = io("http://localhost:3001/chats", {
+	const socket = io("https://chat-api.carum.dev/chats", {
 		auth: { token: token.value },
 		query: { chat_id: chatId },
 		forceNew: true,
