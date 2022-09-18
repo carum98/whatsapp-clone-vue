@@ -1,7 +1,18 @@
-# Vue 3 + Vite
+# <img src="https://github.com/carum98/whatsapp-clone-vue/blob/main/public/favicon.ico" width="30">  <img src="https://github.com/carum98/whatsapp-clone-vue/blob/main/src/assets/logo.png" width="30">
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+**Whatsapp clone** build with Vue 3 + Typescript + Vite
 
-## Recommended IDE Setup
+## SetUp
+This project use [Chat API](https://github.com/carum98/chat-api)
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+With Docker
+```bash
+docker run -d -p 8080:8080 ghcr.io/carum98/whatsapp-clone:[tag]
+```
+
+## Screenshots
+![](https://github.com/carum98/whatsapp-clone-vue/blob/main/screenshots/chats.png)
+
+![](https://github.com/carum98/whatsapp-clone-vue/blob/main/screenshots/contacts.png)
+
+![](https://github.com/carum98/whatsapp-clone-vue/blob/main/screenshots/login.png)
